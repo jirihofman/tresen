@@ -26,13 +26,6 @@ export const generateJourneys = (step1 = Step1, trips = []) => {
     return journeys
   }
 
-  // pokud by melo byt najeto vice nez 360km/den, nedovolime to
-  if (MAX_KM_DAY < step1.distance / trips.length) {
-    console.error('Moc velka vzdalenost na %s dnu', step1.distance)
-  } else {
-    console.log('KM denne', step1.distance / workDays.length)
-  }
-
   // zamicham pole pracovnich dnu
   workDays = _shuffle(workDays)
 

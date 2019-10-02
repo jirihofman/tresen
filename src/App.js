@@ -183,7 +183,7 @@ export default class LogBookApp extends React.Component {
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className='ml-auto' navbar>
               <NavItem>
-                <NavLink href='https://github.com/jirihofman/tresen/'>GitHub</NavLink>
+                <NavLink href='https://github.com/jirihofman/tresen/' target='_blank'>GitHub</NavLink>
               </NavItem>
               <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav caret>Options</DropdownToggle>
