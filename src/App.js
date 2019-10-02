@@ -1,6 +1,6 @@
 import React from 'react'
 import XLSX from 'xlsx'
-import { Button, Collapse, Navbar, NavbarBrand, Container, NavItem, NavLink, Nav, Row, Col, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, FormGroup, Input, Form, Label, FormFeedback } from 'reactstrap'
+import { Button, Collapse, Navbar, NavbarBrand, Container, NavItem, NavLink, Nav, Row, Col, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, FormGroup, Input, Form, Label } from 'reactstrap'
 import 'bootstrap/dist/css/bootstrap.css'
 
 import TripTable from './components/TripTable'
@@ -17,9 +17,9 @@ export function handleSetData (year) {
       dateFrom: `${year}-01-01`,
       dateTo: `${year}-12-31`,
       distance: 5000,
-      mileageStart: 100000,
-      spz: 'SPZ0001',
-      startLocation: new Location('Hradec Kralove', 'HK', '50002')
+      // mileageStart: 100000
+      // spz: 'SPZ0001',
+      startLocation: 'PnL'
     },
     summary: {
       distance: 0,
@@ -72,7 +72,7 @@ export default class LogBookApp extends React.Component {
     super(props)
 
     // TODO unfake
-    const LOCATION_HK = new Location('Předměřice n. Labem', 'PnL', '50302')
+    const LOCATION_PNL = new Location('Předměřice n. Labem', 'PnL', '50302')
 
     this.handleStep1Change = this.handleStep1Change.bind(this)
     this.handleJourneyChange = this.handleJourneyChange.bind(this)
@@ -89,13 +89,13 @@ export default class LogBookApp extends React.Component {
       /** Seznam vsech mist, kam muzu jezdit. TODO - do zaskrtavaciho seznamu a samostatneho souboru */
       trips: [
         new Trip(
-          LOCATION_HK,
+          LOCATION_PNL,
           new Location('Praha', 'PRG', '10100'),
           120,
           true
         ),
         new Trip(
-          LOCATION_HK,
+          LOCATION_PNL,
           new Location('Hradec Králové', 'HK', '50002'),
           9,
           true
@@ -108,7 +108,7 @@ export default class LogBookApp extends React.Component {
         distance: 0,
         mileageStart: '',
         spz: '',
-        startLocation: LOCATION_HK
+        startLocation: 'HK'
       },
       /** Shrnuti cest za dane obdobi vypocitane z jednotlivych cest */
       summary: {
@@ -183,7 +183,7 @@ export default class LogBookApp extends React.Component {
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className='ml-auto' navbar>
               <NavItem>
-                <NavLink href='https://github.com/reactstrap/reactstrap'>GitHub</NavLink>
+                <NavLink href='https://github.com/jirihofman/tresen/'>GitHub</NavLink>
               </NavItem>
               <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav caret>Options</DropdownToggle>
@@ -191,32 +191,26 @@ export default class LogBookApp extends React.Component {
                   <DropdownItem>Option 1</DropdownItem>
                   <DropdownItem>Option 2</DropdownItem>
                   <DropdownItem divider />
-                  <DropdownItem>Reset</DropdownItem>
+                  <DropdownItem onClick={()=>alert(222)}>Reset</DropdownItem>
                 </DropdownMenu>
               </UncontrolledDropdown>
             </Nav>
           </Collapse>
         </Navbar>
         <Row>
-          <Col>
+          <Col className='col'>
             <Form className='hidden-print' inline>
-              <Input type='text' name='spz' id='spz' placeholder='SPZ vozidla' valid={this.state.step1.spz} invalid={!this.state.step1.spz} required onChange={this.handleStep1Change} value={this.state.step1.spz} />
-              <Input type='number' name='mileageStart' id='mileageStart' placeholder='Kilometry' step={100} onChange={this.handleStep1Change} value={this.state.step1.mileageStart} />
-              <Button onClick={() => this.handleSetData(new Date().getFullYear() - 1)} color='primary'>{new Date().getFullYear() - 1}</Button>
-              <Button onClick={() => this.handleSetData(new Date().getFullYear())} color='primary'>{new Date().getFullYear()}</Button>
-              <Button onClick={() => this.handleSetData(new Date().getFullYear() + 1)} color='primary'>{new Date().getFullYear() + 1}</Button>
-              <Button onClick={() => this.handleUpdateSummary(this.state.step1, this.state.journeys)} color='danger'>Update summary</Button>
-              <Input type='number' name='distance' id='distance' placeholder='dist' step={10} onChange={this.handleStep1Change} value={this.state.step1.distance} />
-            </Form>
-            <Form className='hidden-print' inline>
-              <FormGroup className='mr-1 er bg-light'>
-                <Label for='dateFrom' className='p-3'>Od</Label>
-                <Input type='date' name='dateFrom' id='dateFrom' placeholder='Od' value={this.state.step1.dateFrom} onChange={this.handleStep1Change} />
+              <Input hidden type='text' name='spz' id='spz' placeholder='SPZ vozidla' valid={this.state.step1.spz} invalid={!this.state.step1.spz} required onChange={this.handleStep1Change} value={this.state.step1.spz} />
+              <Input hidden type='number' name='mileageStart' id='mileageStart' placeholder='Kilometry' step={100} onChange={this.handleStep1Change} value={this.state.step1.mileageStart} />
+              <Button hidden onClick={() => this.handleUpdateSummary(this.state.step1, this.state.journeys)} color='danger'>Update summary</Button>
+              <FormGroup className='mr-3 er bg-light'>
+                <Label for='distance' className='p-3'>Vzdálenost</Label>
+                <Input type='number' name='distance' id='distance' className='col-4' placeholder='Najeto' step={500} onChange={this.handleStep1Change} value={this.state.step1.distance} />
               </FormGroup>
-              <FormGroup className='mr-1 rder bg-light'>
-                <Label for='dateTo' className='p-3'>Do</Label>
-                <Input type='date' name='dateTo' id='dateTo' placeholder='Do' value={this.state.step1.dateTo} onChange={this.handleStep1Change} />
-                <FormFeedback invalid={0}>Sweet! that name is available</FormFeedback>
+              <FormGroup className='mr-3 er bg-light'>
+                <Button onClick={() => this.handleSetData(new Date().getFullYear() - 1)} color='primary'>{new Date().getFullYear() - 1}</Button>
+                <Button onClick={() => this.handleSetData(new Date().getFullYear())} color='primary'>{new Date().getFullYear()}</Button>
+                <Button onClick={() => this.handleSetData(new Date().getFullYear() + 1)} color='primary'>{new Date().getFullYear() + 1}</Button>
               </FormGroup>
               <Button
                 onClick={this.handleSubmit} color='primary' style={{ margin: '0.3em' }}
@@ -238,14 +232,37 @@ export default class LogBookApp extends React.Component {
           </Col>
         </Row>
         <Row>
+          <Form className='hidden-print' inline>
+            <Col xs={4}>
+              <FormGroup className='mr-1 er bg-light'>
+                <Label for='dateFrom' className='p-3 col-2'>Od</Label>
+                <Input type='date' name='dateFrom' id='dateFrom' placeholder='Od' value={this.state.step1.dateFrom} onChange={this.handleStep1Change} />
+              </FormGroup>
+            </Col>
+            <Col xs={4}>
+              <FormGroup className='mr-1 rder bg-light'>
+                <Label for='dateTo' className='p-3 col-2'>Do</Label>
+                <Input type='date' name='dateTo' id='dateTo' placeholder='Do' value={this.state.step1.dateTo} onChange={this.handleStep1Change} />
+              </FormGroup>
+            </Col>
+            <Col xs={4}>
+              <FormGroup className='mr-1 er bg-light'>
+                <Label for='startLocation' className='p-3'>Výchozí lokace</Label>
+                <Input type='select' name='startLocation' id='startLocation' placeholder='Z' value={this.state.step1.startLocation} onChange={this.handleStep1Change}>
+                  <option>PnL</option>
+                  <option>HK</option>
+                </Input>
+              </FormGroup>
+            </Col>
+          </Form>
+        </Row>
+        <Row>
           <TripTable journeys={this.state.journeys} />
         </Row>
         <style>
           {'@media print {.hidden-print{display: none;}}'}
         </style>
-        <Row>
-          <span>Summary tTodo</span>
-        </Row>
+        <Row>TODO</Row>
 
       </Container>
     )

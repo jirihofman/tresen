@@ -88,7 +88,7 @@ export const generateJourneys = (step1 = Step1, trips = []) => {
  * @param {object} step1 Data z prvniho kroku
  */
 export function isStep1Valid (step1 = Step1) {
-  return Boolean(step1 && step1.dateFrom && step1.dateTo && step1.mileageStart && step1.spz && step1.startLocation && step1.dateFrom.valueOf() <= step1.dateTo.valueOf() && step1.distance && step1.distance > 0)
+  return Boolean(step1 && step1.dateFrom && step1.dateTo && step1.startLocation && step1.dateFrom.valueOf() <= step1.dateTo.valueOf() && step1.distance && step1.distance > 0)
 }
 
 /* TODO: prazdniny */
