@@ -1,48 +1,42 @@
-import React, { Component } from 'react';
-import { Table } from 'reactstrap';
+import React, { Component } from 'react'
+import { Table } from 'reactstrap'
 
 class TripTable extends Component {
+  renderTableRow (journeys) {
+    console.log('renderuju radky:', journeys)
+    return journeys.map((journey, i) => {
+      return (
+        <tr key={`j-${i}`}>
+          <td>{journey.date.toLocaleDateString()}</td>
+          <td>{journey.location.start.name}</td>
+          <td>{journey.location.end.name}</td>
+          <td>{journey.distance}</td>
+          <td>{journey.note}</td>
+        </tr>
+      )
+    })
+  }
 
-	renderTableRow() {
-		return <tbody>
-			<tr>
-				<th scope="row">1</th>
-				<td>Mark</td>
-				<td>Otto</td>
-				<td>@mdo</td>
-			</tr>
-			<tr>
-				<th scope="row">2</th>
-				<td>Jacob</td>
-				<td>Thornton</td>
-				<td>@fat</td>
-			</tr>
-			<tr>
-				<th scope="row">3</th>
-				<td>Larry</td>
-				<td>the Bird</td>
-				<td>@twitter</td>
-			</tr>
-		</tbody>;
-	}
-
-	render() {
-		const intervals = this.props.intervals;
-
-		return (
-			<Table>
-				<thead>
-					<tr>
-						<th>#</th>
-						<th>First Name</th>
-						<th>Last Name</th>
-						<th>Username</th>
-					</tr>
-				</thead>
-				{this.renderTableRow()}
-			</Table>
-		);
-	}
+  render () {
+    return (
+      <Table id='journeys'>
+        <thead>
+          <tr>
+            <th>Datum</th>
+            <th>Odkud</th>
+            <th>Kam</th>
+            <th>Vzdálenost v km</th>
+            <th>Důvod cesty</th>
+          </tr>
+        </thead>
+        <tbody>
+          {this.renderTableRow(this.props.journeys)}
+        </tbody>
+      </Table>
+    )
+  }
 }
 
-export default TripTable;
+// TODO PropTypes
+
+export default TripTable
