@@ -175,6 +175,7 @@ export default class LogBookApp extends React.Component {
   /***********/
 
   render () {
+    const disabledButtons = !isStep1Valid(this.state.step1)
     return (
       <Container>
         <Navbar color='light' light expand='md'>
@@ -219,10 +220,11 @@ export default class LogBookApp extends React.Component {
               </FormGroup>
               <Button
                 onClick={this.handleSubmit} color='primary' style={{ margin: '0.3em' }}
-                disabled={!isStep1Valid(this.state.step1)}
+                disabled={disabledButtons}
               > Generuj
               </Button>
               <Button
+                disabled={disabledButtons}
                 onClick={() => {
                   /* convert state to workbook */
                   var tbl = document.getElementById('journeys')
