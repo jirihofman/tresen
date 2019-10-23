@@ -8,6 +8,7 @@
   - [ ] Export do XLS - datumy, čísla ne jako raw
   - [ ] Summary zobrazeni a aktualizace podle generovani
   - [ ] Odlehčit závislosti
+  - [ ] Refactoring knihoven, class
   - [ ] Code coverage
   - [ ] standard vs eslint, console.log
   - [ ] Poznamka (duvod cesty) udelat jako zaskrtavaci seznam
@@ -17,6 +18,7 @@
   - [ ] Podle toho, kterou vyberu 'domaci' lokaci mi to nabidne mozne Tripy (ty, ktere zacinaji v domaci lokaci)
   - [ ] CRUD Journeys
   - [ ] CRUD Trips
+  - [ ] Zapojit MAX_KM_DAY na kontrolu jízd v jednom dni
   
 # Print (Ctrl+P)
 Schováni formulářových prvků: https://stackoverflow.com/questions/52880971/how-to-use-media-print-within-reactjs-web-app

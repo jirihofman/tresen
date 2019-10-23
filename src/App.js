@@ -1,6 +1,6 @@
 import React from 'react'
 import XLSX from 'xlsx'
-import { Button, Collapse, Navbar, NavbarBrand, Container, NavItem, NavLink, Nav, Row, Col, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, FormGroup, Input, Form, Label } from 'reactstrap'
+import { Button, Collapse, Navbar, NavbarBrand, Container, NavItem, NavLink, Nav, Row, Col, FormGroup, Input, Form, Label } from 'reactstrap'
 import 'bootstrap/dist/css/bootstrap.css'
 
 import TripTable from './components/TripTable'
@@ -108,7 +108,7 @@ export default class LogBookApp extends React.Component {
         distance: 0,
         mileageStart: '',
         spz: '',
-        startLocation: 'HK'
+        startLocation: 'PnL'
       },
       /** Shrnuti cest za dane obdobi vypocitane z jednotlivych cest */
       summary: {
@@ -183,17 +183,8 @@ export default class LogBookApp extends React.Component {
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className='ml-auto' navbar>
               <NavItem>
-                <NavLink href='https://github.com/jirihofman/tresen/' target='_blank'>GitHub</NavLink>
+                <NavLink href='https://github.com/jirihofman/tresen/'>GitHub</NavLink>
               </NavItem>
-              <UncontrolledDropdown nav inNavbar>
-                <DropdownToggle nav caret>Options</DropdownToggle>
-                <DropdownMenu right>
-                  <DropdownItem>Option 1</DropdownItem>
-                  <DropdownItem>Option 2</DropdownItem>
-                  <DropdownItem divider />
-                  <DropdownItem onClick={()=>alert(222)}>Reset</DropdownItem>
-                </DropdownMenu>
-              </UncontrolledDropdown>
             </Nav>
           </Collapse>
         </Navbar>
@@ -248,7 +239,7 @@ export default class LogBookApp extends React.Component {
             <Col xs={4}>
               <FormGroup className='mr-1 er bg-light'>
                 <Label for='startLocation' className='p-3'>Výchozí lokace</Label>
-                <Input type='select' name='startLocation' id='startLocation' placeholder='Z' value={this.state.step1.startLocation} onChange={this.handleStep1Change}>
+                <Input disabled title='Zatim napevno Predmerice nad Labem' type='select' name='startLocation' id='startLocation' placeholder='Z' value={this.state.step1.startLocation} onChange={this.handleStep1Change}>
                   <option>PnL</option>
                   <option>HK</option>
                 </Input>
